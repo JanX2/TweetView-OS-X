@@ -23,7 +23,7 @@
 	NSString *statusString = @"Example tweet text here. Don't you just love AppKit? Here's a reference to @flyosity. Check out this cool new site: http://apple.com #hashtag #tutorial";
 	
 	// Rect inset from the contentView to put our textview
-	NSRect insetRect = NSInsetRect([[self.window contentView] bounds], 30, 30);
+	NSRect insetRect = NSInsetRect(self.window.contentView.bounds, 30, 30);
 	
 	// Building up our attributed string
 	NSMutableAttributedString *attributedStatusString = [[NSMutableAttributedString alloc] initWithString:statusString];
@@ -31,29 +31,28 @@
 	// Defining our paragraph style for the tweet text. Starting with the shadow to make the text
 	// appear inset against the gray background.
 	NSShadow *textShadow = [[NSShadow alloc] init];
-	[textShadow setShadowColor:[NSColor colorWithDeviceWhite:1 alpha:.8]];
-	[textShadow setShadowBlurRadius:0];
-	[textShadow setShadowOffset:NSMakeSize(0, -1)];
+	textShadow.shadowColor = [NSColor colorWithDeviceWhite:1 alpha:.8];
+	textShadow.shadowBlurRadius = 0;
+	textShadow.shadowOffset = NSMakeSize(0, -1);
 							 
 	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	[paragraphStyle setMinimumLineHeight:22];
-	[paragraphStyle setMaximumLineHeight:22];
-	[paragraphStyle setParagraphSpacing:0];
-	[paragraphStyle setParagraphSpacingBefore:0];
-	[paragraphStyle setTighteningFactorForTruncation:4];
-	[paragraphStyle setAlignment:NSNaturalTextAlignment];
-	[paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+	paragraphStyle.minimumLineHeight = 22;
+	paragraphStyle.maximumLineHeight = 22;
+	paragraphStyle.paragraphSpacing = 0;
+	paragraphStyle.paragraphSpacingBefore = 0;
+	paragraphStyle.tighteningFactorForTruncation = 4;
+	paragraphStyle.alignment = NSNaturalTextAlignment;
+	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
 	
 	// Our initial set of attributes that are applied to the full string length
-	NSDictionary *fullAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-									[NSColor colorWithDeviceHue:.53 saturation:.13 brightness:.26 alpha:1], NSForegroundColorAttributeName,
-									textShadow, NSShadowAttributeName,
-									[NSCursor arrowCursor], NSCursorAttributeName,
-									[NSNumber numberWithFloat:0.0], NSKernAttributeName,
-									[NSNumber numberWithInt:0], NSLigatureAttributeName,
-									paragraphStyle, NSParagraphStyleAttributeName,
-									[NSFont systemFontOfSize:14.0], NSFontAttributeName, nil];
-	[attributedStatusString addAttributes:fullAttributes range:NSMakeRange(0, [statusString length])];
+	NSDictionary *fullAttributes = @{NSForegroundColorAttributeName: [NSColor colorWithDeviceHue:.53 saturation:.13 brightness:.26 alpha:1],
+									NSShadowAttributeName: textShadow,
+									NSCursorAttributeName: [NSCursor arrowCursor],
+									NSKernAttributeName: @0.0f,
+									NSLigatureAttributeName: @0,
+									NSParagraphStyleAttributeName: paragraphStyle,
+									NSFontAttributeName: [NSFont systemFontOfSize:14.0]};
+	[attributedStatusString addAttributes:fullAttributes range:NSMakeRange(0, statusString.length)];
 	[textShadow release];
 	[paragraphStyle release];
 		
@@ -118,15 +117,15 @@
 	
 	// Initialize the custom text view, set its myriad settings.
 	TVTextView *statusView = [[TVTextView alloc] initWithFrame:insetRect];
-	[statusView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
-	[statusView setBackgroundColor:[NSColor clearColor]];
-	[statusView setTextContainerInset:NSZeroSize];
-	[[statusView textStorage] setAttributedString:attributedStatusString];
-	[statusView setEditable:NO];
-	[statusView setSelectable:YES];
+	statusView.autoresizingMask = NSViewWidthSizable|NSViewHeightSizable;
+	statusView.backgroundColor = [NSColor clearColor];
+	statusView.textContainerInset = NSZeroSize;
+	[statusView.textStorage setAttributedString:attributedStatusString];
+	statusView.editable = NO;
+	statusView.selectable = YES;
 	
 	// Add to window and we're done.
-	[[self.window contentView] addSubview:statusView];
+	[self.window.contentView addSubview:statusView];
 	[statusView release];
 	
 	[attributedStatusString release];
