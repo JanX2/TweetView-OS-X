@@ -9,6 +9,12 @@
 
 #import "TVTextView.h"
 
+
+NSString * const	TVLinkMatch		= @"TVLinkMatch";
+NSString * const	TVUsernameMatch	= @"TVUsernameMatch";
+NSString * const	TVHashtagMatch	= @"TVHashtagMatch";
+
+
 @implementation TVTextView
 
 // We're only subclassing NSTextView so we can grab its mouse down event. Everything
@@ -30,17 +36,17 @@
 		
 		// Depending on what they clicked we could open a URL or perhaps pop open a profile HUD
 		// if they clicked on a username. For now, we'll just throw it out to the log.
-		if( attributes[@"LinkMatch"] != nil ) {
+		if( attributes[TVLinkMatch] != nil ) {
 			// Remember what object we stashed in this attribute? Oh yeah, it's a URL string. Boo ya!
-			NSLog( @"LinkMatch: %@", attributes[@"LinkMatch"] );
+			NSLog( @"LinkMatch: %@", attributes[TVLinkMatch] );
 		}
 		
-		if( attributes[@"UsernameMatch"] != nil ) {
-			NSLog( @"UsernameMatch: %@", attributes[@"UsernameMatch"] );
+		if( attributes[TVUsernameMatch] != nil ) {
+			NSLog( @"UsernameMatch: %@", attributes[TVUsernameMatch] );
 		}
 		
-		if( attributes[@"HashtagMatch"] != nil ) {
-			NSLog( @"HashtagMatch: %@", attributes[@"HashtagMatch"] );
+		if( attributes[TVHashtagMatch] != nil ) {
+			NSLog( @"HashtagMatch: %@", attributes[TVHashtagMatch] );
 		}
 		
 	}

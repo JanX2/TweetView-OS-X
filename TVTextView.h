@@ -9,6 +9,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+FOUNDATION_EXPORT NSString * const TVLinkMatch;
+FOUNDATION_EXPORT NSString * const TVUsernameMatch;
+FOUNDATION_EXPORT NSString * const TVHashtagMatch;
+
+
 @interface TVTextView : NSTextView {
 
 }

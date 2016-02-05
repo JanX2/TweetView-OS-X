@@ -72,7 +72,7 @@
 									  [NSCursor pointingHandCursor], NSCursorAttributeName,
 									  [NSColor blueColor], NSForegroundColorAttributeName,
 									  [NSFont boldSystemFontOfSize:14.0], NSFontAttributeName,
-									  linkMatchedString, @"LinkMatch",
+									  linkMatchedString, TVLinkMatch,
 									  nil];
 			[attributedStatusString addAttributes:linkAttr range:range];
 			[linkAttr release];
@@ -87,7 +87,7 @@
 									   [NSColor blackColor], NSForegroundColorAttributeName,
 									   [NSCursor pointingHandCursor], NSCursorAttributeName,
 									   [NSFont boldSystemFontOfSize:14.0], NSFontAttributeName,
-									   usernameMatchedString, @"UsernameMatch",
+									   usernameMatchedString, TVUsernameMatch,
 									   nil];
 			[attributedStatusString addAttributes:linkAttr2 range:range];
 			[linkAttr2 release];
@@ -102,7 +102,7 @@
 									  [NSColor grayColor], NSForegroundColorAttributeName,
 									  [NSCursor pointingHandCursor], NSCursorAttributeName,
 									  [NSFont systemFontOfSize:14.0], NSFontAttributeName,
-									  hashtagMatchedString, @"HashtagMatch",
+									  hashtagMatchedString, TVHashtagMatch,
 									  nil];
 			[attributedStatusString addAttributes:linkAttr3 range:range];
 			[linkAttr3 release];
