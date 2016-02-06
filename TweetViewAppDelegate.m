@@ -9,7 +9,6 @@
 
 #import "TweetViewAppDelegate.h"
 #import "TVTextView.h"
-#import "RegexKitLite.h"
 
 @implementation TweetViewAppDelegate
 
@@ -57,15 +56,16 @@
 	[paragraphStyle release];
 		
 	// Generate arrays of our interesting items. Links, usernames, hashtags.
-	NSArray *linkMatches = [self scanStringForLinks:statusString];
-	NSArray *usernameMatches = [self scanStringForUsernames:statusString];
-	NSArray *hashtagMatches = [self scanStringForHashtags:statusString];
+	NSArray<NSTextCheckingResult *> *linkMatches = [self scanStringForLinks:statusString];
+	NSArray<NSTextCheckingResult *> *usernameMatches = [self scanStringForUsernames:statusString];
+	NSArray<NSTextCheckingResult *> *hashtagMatches = [self scanStringForHashtags:statusString];
 	
 	// Iterate across the string matches from our regular expressions, find the range
 	// of each match, add new attributes to that range	
-	for (NSString *linkMatchedString in linkMatches) {
-		NSRange range = [statusString rangeOfString:linkMatchedString];
+	for (NSTextCheckingResult *match in linkMatches) {
+		NSRange range = match.range;
 		if( range.location != NSNotFound ) {
+			NSString *linkMatchedString = [statusString substringWithRange:range];
 			// Add custom attribute of LinkMatch to indicate where our URLs are found. Could be blue
 			// or any other color.
 			NSDictionary *linkAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -79,9 +79,11 @@
 		}
 	}
 	
-	for (NSString *usernameMatchedString in usernameMatches) {
-		NSRange range = [statusString rangeOfString:usernameMatchedString];
+	for (NSTextCheckingResult *match in usernameMatches) {
+		NSRange range = match.range;
 		if( range.location != NSNotFound ) {
+			NSString *usernameMatchedString = [statusString substringWithRange:range];
+			
 			// Add custom attribute of UsernameMatch to indicate where our usernames are found
 			NSDictionary *linkAttr2 = [[NSDictionary alloc] initWithObjectsAndKeys:
 									   [NSColor blackColor], NSForegroundColorAttributeName,
@@ -94,9 +96,11 @@
 		}
 	}
 	
-	for (NSString *hashtagMatchedString in hashtagMatches) {
-		NSRange range = [statusString rangeOfString:hashtagMatchedString];
+	for (NSTextCheckingResult *match in hashtagMatches) {
+		NSRange range = match.range;
 		if( range.location != NSNotFound ) {
+			NSString *hashtagMatchedString = [statusString substringWithRange:range];
+			
 			// Add custom attribute of HashtagMatch to indicate where our hashtags are found
 			NSDictionary *linkAttr3 = [[NSDictionary alloc] initWithObjectsAndKeys:
 									  [NSColor grayColor], NSForegroundColorAttributeName,
@@ -135,18 +139,88 @@
 #pragma mark String parsing
 
 // These regular expressions aren't the greatest. There are much better ones out there to parse URLs, @usernames
-// and hashtags out of tweets. Getting the escaping just right is a pain in the ass, so be forewarned.
+// and hashtags out of tweets. Getting the escaping just right is a bit of a pain:
+// you have to replace all backslashes with double-backslashes (replace ‘\’ with ‘\\’).
 
-- (NSArray *)scanStringForLinks:(NSString *)string {
-	return [string componentsMatchedByRegex:@"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))"];
+- (NSArray<NSTextCheckingResult *> *)scanStringForLinks:(NSString *)string {
+	static NSRegularExpression *regEx = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		NSString * const pattern =
+		@"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))";
+		
+		NSError *error;
+		regEx =
+		[NSRegularExpression regularExpressionWithPattern:pattern
+												  options:0
+													error:&error];
+		if (regEx == nil) {
+			NSLog(@"%@", error);
+		}
+	});
+	
+	const NSRange fullRange = NSMakeRange(0, string.length);
+	
+	NSArray *matches = [regEx matchesInString:string
+									  options:0
+										range:fullRange];
+	
+	return matches;
 }
 
-- (NSArray *)scanStringForUsernames:(NSString *)string {
-	return [string componentsMatchedByRegex:@"@{1}([-A-Za-z0-9_]{2,})"];
+- (NSArray<NSTextCheckingResult *> *)scanStringForUsernames:(NSString *)string {
+	static NSRegularExpression *regEx = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		NSString * const pattern =
+		@"@{1}([-A-Za-z0-9_]{2,})";
+		
+		NSError *error;
+		regEx =
+		[NSRegularExpression regularExpressionWithPattern:pattern
+												  options:0
+													error:&error];
+		if (regEx == nil) {
+			NSLog(@"%@", error);
+		}
+	});
+	
+	const NSRange fullRange = NSMakeRange(0, string.length);
+	
+	NSArray *matches = [regEx matchesInString:string
+									  options:0
+										range:fullRange];
+	
+	return matches;
 }
 
-- (NSArray *)scanStringForHashtags:(NSString *)string {
-	return [string componentsMatchedByRegex:@"[\\s]{1,}#{1}([^\\s]{2,})"];
+- (NSArray<NSTextCheckingResult *> *)scanStringForHashtags:(NSString *)string {
+	static NSRegularExpression *regEx = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		NSString * const pattern =
+		@"[\\s]{1,}#{1}([^\\s]{2,})";
+		
+		NSError *error;
+		regEx =
+		[NSRegularExpression regularExpressionWithPattern:pattern
+												  options:0
+													error:&error];
+		if (regEx == nil) {
+			NSLog(@"%@", error);
+		}
+	});
+	
+	const NSRange fullRange = NSMakeRange(0, string.length);
+	
+	NSArray *matches = [regEx matchesInString:string
+									  options:0
+										range:fullRange];
+	
+	return matches;
 }
 
 @end

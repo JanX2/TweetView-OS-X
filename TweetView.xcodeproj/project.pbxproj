@@ -13,7 +13,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		DE929A8B12A875F200C03F39 /* TVTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE929A8A12A875F200C03F39 /* TVTextView.m */; };
-		DE929AAC12A8929700C03F39 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DE929AAB12A8929700C03F39 /* RegexKitLite.m */; };
 		DE929AB612A8974400C03F39 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE929AB512A8974400C03F39 /* libicucore.dylib */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +31,6 @@
 		8D1107320486CEB800E47090 /* TweetView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE929A8912A875F200C03F39 /* TVTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVTextView.h; sourceTree = "<group>"; };
 		DE929A8A12A875F200C03F39 /* TVTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVTextView.m; sourceTree = "<group>"; };
-		DE929AAA12A8929600C03F39 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		DE929AAB12A8929700C03F39 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		DE929AB512A8974400C03F39 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -53,8 +50,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DE929AAA12A8929600C03F39 /* RegexKitLite.h */,
-				DE929AAB12A8929700C03F39 /* RegexKitLite.m */,
 				256AC3D80F4B6AC300CF3369 /* TweetViewAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* TweetViewAppDelegate.m */,
 				DE929A8912A875F200C03F39 /* TVTextView.h */,
@@ -198,7 +193,6 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* TweetViewAppDelegate.m in Sources */,
 				DE929A8B12A875F200C03F39 /* TVTextView.m in Sources */,
-				DE929AAC12A8929700C03F39 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
