@@ -12,7 +12,7 @@
 @interface TweetViewAppDelegate : NSObject <NSApplicationDelegate, NSTextViewDelegate> {
 }
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow *window;
 
 - (NSArray *)scanStringForLinks:(NSString *)string;
 - (NSArray *)scanStringForUsernames:(NSString *)string;

@@ -50,8 +50,6 @@
 									NSParagraphStyleAttributeName: paragraphStyle,
 									NSFontAttributeName: [NSFont systemFontOfSize:14.0]};
 	[attributedStatusString addAttributes:fullAttributes range:NSMakeRange(0, statusString.length)];
-	[textShadow release];
-	[paragraphStyle release];
 		
 	// Generate arrays of our interesting items. Links, usernames, hashtags.
 	NSArray<NSTextCheckingResult *> *linkMatches = [self scanStringForLinks:statusString];
@@ -73,7 +71,6 @@
 									  linkMatchedString, TVLinkMatch,
 									  nil];
 			[attributedStatusString addAttributes:linkAttr range:range];
-			[linkAttr release];
 		}
 	}
 	
@@ -90,7 +87,6 @@
 									   usernameMatchedString, TVUsernameMatch,
 									   nil];
 			[attributedStatusString addAttributes:linkAttr2 range:range];
-			[linkAttr2 release];
 		}
 	}
 	
@@ -107,7 +103,6 @@
 									  hashtagMatchedString, TVHashtagMatch,
 									  nil];
 			[attributedStatusString addAttributes:linkAttr3 range:range];
-			[linkAttr3 release];
 		}
 	}
 	
@@ -128,9 +123,7 @@
 	
 	// Add to window and we're done.
 	[self.window.contentView addSubview:statusView];
-	[statusView release];
 	
-	[attributedStatusString release];
 }
 
 #pragma mark -
