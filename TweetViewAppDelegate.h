@@ -10,7 +10,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface TweetViewAppDelegate : NSObject <NSApplicationDelegate, NSTextViewDelegate> {
-    NSWindow *window;
 }
 
 @property (assign) IBOutlet NSWindow *window;
