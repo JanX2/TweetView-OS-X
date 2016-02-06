@@ -64,12 +64,12 @@
 			NSString *linkMatchedString = [statusString substringWithRange:range];
 			// Add custom attribute of LinkMatch to indicate where our URLs are found. Could be blue
 			// or any other color.
-			NSDictionary *linkAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
-									  [NSCursor pointingHandCursor], NSCursorAttributeName,
-									  [NSColor blueColor], NSForegroundColorAttributeName,
-									  [NSFont boldSystemFontOfSize:14.0], NSFontAttributeName,
-									  linkMatchedString, TVLinkMatch,
-									  nil];
+			NSDictionary *linkAttr = @{
+									   NSCursorAttributeName: [NSCursor pointingHandCursor],
+									   NSForegroundColorAttributeName: [NSColor blueColor],
+									   NSFontAttributeName: [NSFont boldSystemFontOfSize:14.0],
+									   TVLinkMatch: linkMatchedString
+									   };
 			[attributedStatusString addAttributes:linkAttr range:range];
 		}
 	}
@@ -80,12 +80,12 @@
 			NSString *usernameMatchedString = [statusString substringWithRange:range];
 			
 			// Add custom attribute of UsernameMatch to indicate where our usernames are found
-			NSDictionary *linkAttr2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-									   [NSColor blackColor], NSForegroundColorAttributeName,
-									   [NSCursor pointingHandCursor], NSCursorAttributeName,
-									   [NSFont boldSystemFontOfSize:14.0], NSFontAttributeName,
-									   usernameMatchedString, TVUsernameMatch,
-									   nil];
+			NSDictionary *linkAttr2 = @{
+										NSForegroundColorAttributeName: [NSColor blackColor],
+										NSCursorAttributeName: [NSCursor pointingHandCursor],
+										NSFontAttributeName: [NSFont boldSystemFontOfSize:14.0],
+										TVUsernameMatch: usernameMatchedString
+										};
 			[attributedStatusString addAttributes:linkAttr2 range:range];
 		}
 	}
@@ -96,12 +96,12 @@
 			NSString *hashtagMatchedString = [statusString substringWithRange:range];
 			
 			// Add custom attribute of HashtagMatch to indicate where our hashtags are found
-			NSDictionary *linkAttr3 = [[NSDictionary alloc] initWithObjectsAndKeys:
-									  [NSColor grayColor], NSForegroundColorAttributeName,
-									  [NSCursor pointingHandCursor], NSCursorAttributeName,
-									  [NSFont systemFontOfSize:14.0], NSFontAttributeName,
-									  hashtagMatchedString, TVHashtagMatch,
-									  nil];
+			NSDictionary *linkAttr3 = @{
+										NSForegroundColorAttributeName: [NSColor grayColor],
+										NSCursorAttributeName: [NSCursor pointingHandCursor],
+										NSFontAttributeName: [NSFont systemFontOfSize:14.0],
+										TVHashtagMatch: hashtagMatchedString
+										};
 			[attributedStatusString addAttributes:linkAttr3 range:range];
 		}
 	}
