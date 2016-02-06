@@ -68,7 +68,7 @@
 									   NSCursorAttributeName: [NSCursor pointingHandCursor],
 									   NSForegroundColorAttributeName: [NSColor blueColor],
 									   NSFontAttributeName: [NSFont boldSystemFontOfSize:14.0],
-									   TVLinkMatch: linkMatchedString
+									   TVLinkMatchAttributeName: linkMatchedString
 									   };
 			[attributedStatusString addAttributes:linkAttr range:range];
 		}
@@ -84,7 +84,7 @@
 										NSForegroundColorAttributeName: [NSColor blackColor],
 										NSCursorAttributeName: [NSCursor pointingHandCursor],
 										NSFontAttributeName: [NSFont boldSystemFontOfSize:14.0],
-										TVUsernameMatch: usernameMatchedString
+										TVUsernameMatchAttributeName: usernameMatchedString
 										};
 			[attributedStatusString addAttributes:linkAttr2 range:range];
 		}
@@ -100,7 +100,7 @@
 										NSForegroundColorAttributeName: [NSColor grayColor],
 										NSCursorAttributeName: [NSCursor pointingHandCursor],
 										NSFontAttributeName: [NSFont systemFontOfSize:14.0],
-										TVHashtagMatch: hashtagMatchedString
+										TVHashtagMatchAttributeName: hashtagMatchedString
 										};
 			[attributedStatusString addAttributes:linkAttr3 range:range];
 		}

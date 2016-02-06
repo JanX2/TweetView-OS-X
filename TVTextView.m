@@ -10,9 +10,9 @@
 #import "TVTextView.h"
 
 
-NSString * const	TVLinkMatch		= @"TVLinkMatch";
-NSString * const	TVUsernameMatch	= @"TVUsernameMatch";
-NSString * const	TVHashtagMatch	= @"TVHashtagMatch";
+NSString * const	TVLinkMatchAttributeName		= @"TVLinkMatch";
+NSString * const	TVUsernameMatchAttributeName	= @"TVUsernameMatch";
+NSString * const	TVHashtagMatchAttributeName		= @"TVHashtagMatch";
 
 
 @implementation TVTextView
@@ -36,17 +36,17 @@ NSString * const	TVHashtagMatch	= @"TVHashtagMatch";
 		
 		// Depending on what they clicked we could open a URL or perhaps pop open a profile HUD
 		// if they clicked on a username. For now, we'll just throw it out to the log.
-		if( attributes[TVLinkMatch] != nil ) {
+		if( attributes[TVLinkMatchAttributeName] != nil ) {
 			// Remember what object we stashed in this attribute? Oh yeah, it's a URL string. Boo ya!
-			NSLog( @"LinkMatch: %@", attributes[TVLinkMatch] );
+			NSLog( @"LinkMatch: %@", attributes[TVLinkMatchAttributeName] );
 		}
 		
-		if( attributes[TVUsernameMatch] != nil ) {
-			NSLog( @"UsernameMatch: %@", attributes[TVUsernameMatch] );
+		if( attributes[TVUsernameMatchAttributeName] != nil ) {
+			NSLog( @"UsernameMatch: %@", attributes[TVUsernameMatchAttributeName] );
 		}
 		
-		if( attributes[TVHashtagMatch] != nil ) {
-			NSLog( @"HashtagMatch: %@", attributes[TVHashtagMatch] );
+		if( attributes[TVHashtagMatchAttributeName] != nil ) {
+			NSLog( @"HashtagMatch: %@", attributes[TVHashtagMatchAttributeName] );
 		}
 		
 	}

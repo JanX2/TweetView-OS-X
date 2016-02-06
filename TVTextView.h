@@ -10,9 +10,9 @@
 #import <Cocoa/Cocoa.h>
 
 
-FOUNDATION_EXPORT NSString * const TVLinkMatch;
-FOUNDATION_EXPORT NSString * const TVUsernameMatch;
-FOUNDATION_EXPORT NSString * const TVHashtagMatch;
+FOUNDATION_EXPORT NSString * const TVLinkMatchAttributeName;
+FOUNDATION_EXPORT NSString * const TVUsernameMatchAttributeName;
+FOUNDATION_EXPORT NSString * const TVHashtagMatchAttributeName;
 
 
 @interface TVTextView : NSTextView {
